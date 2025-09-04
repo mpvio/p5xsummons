@@ -1,45 +1,24 @@
-use crate::{controllers::{get_data::query, read_write::{read_items, update_items}}, models::named::NamedData};
+use crate::views::p5xui::P5XUI;
+use egui::ViewportBuilder;
 
 pub mod models;
 pub mod controllers;
+pub mod views;
 
 // TODO
 /*
-* add ui/ way for users to add gacha url to automatically fetch id
 * if a database is found -> replace item signifiers (aas) with item names
 */
 #[tokio::main]
 async fn main() {
-    let data = _get_data().await;
-    _write_to_files(data);
-}
-
-async fn _get_data() -> Vec<NamedData> {
-    let mut all_data: Vec<NamedData> = vec![];
-    for i in 1..5 {
-        if let Some(data) = query(i, 1).await {
-            all_data.push(data);
-        }
-    }
-    all_data
-}
-
-fn _write_to_files(data: Vec<NamedData>) {
-    for d in data {
-        println!("{}", update_items(&d.summon, &d));
-    }
-}
-
-fn _read_showcase() {
-    let names : Vec<String> = vec!["standard".into(), "character".into(), "weapon".into(), "beginner".into()];
-    _read_from_files(names);
-}
-
-fn _read_from_files(names: Vec<String>) {
-    for n in names {
-        let data = read_items(&n);
-        if let Some(d) = data {
-            println!("{d:#?}");
-        }
-    }
+    let app = P5XUI::new().await;
+    let options = eframe::NativeOptions {
+        viewport: ViewportBuilder::default().with_inner_size([300.0, 70.0]),
+        ..Default::default()
+    };
+    eframe::run_native(
+        "Persona 5 X Contract Tracker",
+        options,
+        Box::new(|_cc| Ok(Box::new(app)))
+    ).unwrap();
 }

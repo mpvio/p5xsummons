@@ -20,7 +20,7 @@ pub struct NamedSummons {
     pub banner: String, // banner type, remove?
     #[serde(rename = "itemId")]
     pub item_id: String,
-    pub item: String,
+    pub item: String, // character/ persona/ weapon
     pub timestamp: u128
 }
 
@@ -31,5 +31,14 @@ impl NamedData {
 
     pub fn sort_by_summon_id_desc(&mut self) {
         self.list.sort_by(|a, b| b.summon_id.cmp(&a.summon_id));
+    }
+
+    pub fn update_needed(&self, other: &NamedData) -> bool {
+        match (self.list.first(), other.list.first()) {
+            (Some(current), Some(prev)) => {
+                current.summon_id != prev.summon_id
+            },
+            _ => true
+        }
     }
 }

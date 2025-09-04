@@ -2,7 +2,7 @@ use std::{collections::HashSet, fs::{self, File}, io::Write};
 
 use crate::models::named::{NamedData, NamedSummons};
 
-pub fn read_items(item: &String) -> Option<NamedData>{
+fn read_items(item: &String) -> Option<NamedData>{
     if let Ok(info) = fs::read_to_string(format!("{item}.json")) {
         if let Ok(named_data) = serde_json::from_str::<NamedData>(&info) {
             return Some(named_data);
@@ -11,15 +11,29 @@ pub fn read_items(item: &String) -> Option<NamedData>{
     None
 }
 
-pub fn update_items(item: &String, data: &NamedData) -> String {
+pub fn read_all() -> Vec<NamedData> {
+    let names : Vec<String> = vec!["standard".into(), "character".into(), "weapon".into(), "beginner".into()];
+    let mut all_info: Vec<NamedData> = vec![];
+    for n in names {
+        let data = read_items(&n);
+        if let Some(d) = data {
+            all_info.push(d);
+        }
+    }
+    all_info
+}
+
+fn update_items(item: &String, data: &NamedData) -> String {
     match &mut read_items(item) {
         Some(old) => {
-            if old.total == data.total {
-                return String::from(format!("{item} unchanged."));
-            }
+            if old.update_needed(data) {
             // update old list with new data and write to file
             update_helper(old, data);
-            write_items(item, old)
+            return write_items(item, old);
+            }
+            // no changes needed
+            return String::from(format!("{item} unchanged."));
+
         },
         None => {
             // there is no old file, so just write directly to file
@@ -28,7 +42,7 @@ pub fn update_items(item: &String, data: &NamedData) -> String {
     }
 }
 
-pub fn write_items(item: &String, data: &NamedData) -> String {
+fn write_items(item: &String, data: &NamedData) -> String {
     if let Ok(json_data) = serde_json::to_string_pretty(&data) {
         if let Ok(mut file) = File::create(format!("{item}.json")) {
             return match file.write_all(json_data.as_bytes()) {
@@ -38,6 +52,12 @@ pub fn write_items(item: &String, data: &NamedData) -> String {
         }
     }
     String::from("")
+}
+
+pub fn write_or_update_all(data: Vec<NamedData>) {
+    for d in data {
+        println!("{}", update_items(&d.summon, &d));
+    }
 }
 
 fn update_helper(old: &mut NamedData, data: &NamedData) {

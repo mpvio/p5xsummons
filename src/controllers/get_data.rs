@@ -1,10 +1,24 @@
-use std::fs::read_to_string;
+use std::io;
 
+use crate::{controllers::manage_auth_key::get_key, models::{named::{NamedData, NamedSummons}, original::{Response, ResponseData}}};
 
-use crate::models::{named::{NamedData, NamedSummons}, original::{Response, ResponseData}};
+pub async fn query_all(key: Option<String>) -> Vec<NamedData> {
+    let mut all_data: Vec<NamedData> = vec![];
+    for i in 1..5 {
+        if let Some(data) = query(i, 1, &key).await {
+            all_data.push(data);
+        }
+    }
+    all_data
+}
 
-pub async fn query(gacha_type: u8, page: u8) -> Option<NamedData> {
-    if let Ok(auth_key) = read_to_string("authKey.txt") {
+pub async fn query(gacha_type: u8, page: u8, key: &Option<String>) -> Option<NamedData> {
+    let try_key: io::Result<String> = if let Some(k) = key {
+        Ok(k.clone())
+    } else {
+        get_key()
+    };
+    if let Ok(auth_key) = try_key {
         let _params = [
             ("gachaType", &gacha_type.to_string()), ("authKey", &auth_key), ("page", &page.to_string()), ("size", &String::from("10"))
         ];
@@ -18,7 +32,7 @@ pub async fn query(gacha_type: u8, page: u8) -> Option<NamedData> {
                         let mut named_summons = name_summons(&info.data);
                         if info.data.page < info.data.pages {
                             // append next page(s)
-                            if let Some(mut remainder) = Box::pin(query(gacha_type, page+1)).await {
+                            if let Some(mut remainder) = Box::pin(query(gacha_type, page+1, &Some(auth_key))).await {
                                 named_summons.append(&mut remainder.list);
                             }
                         }
