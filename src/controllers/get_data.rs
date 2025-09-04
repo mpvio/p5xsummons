@@ -51,11 +51,11 @@ fn name_summons(data: &ResponseData) -> Vec<NamedSummons> {
         }.to_string();
         let banner = get_banner_type(&summon.cpt);
         let named_summon = NamedSummons {
-            id: summon.id,
-            cpt: banner,
-            aas: summon.aas,
-            aat: item,
-            t: summon.t,
+            summon_id: summon.id,
+            banner,
+            item_id: summon.aas.to_string(),
+            item,
+            timestamp: summon.t,
         };
         named_summons.push(named_summon);
     }
