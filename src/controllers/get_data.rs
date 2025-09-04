@@ -65,8 +65,8 @@ fn name_summons(data: &ResponseData) -> Vec<NamedSummons> {
 fn get_banner_type(gacha_type: &u8) -> String {
     match gacha_type {
         1 => "standard",
-        2 => "character",
-        3 => "weapon",
+        2 => "character", // limited character
+        3 => "weapon", // limited weapon
         _ => "beginner"
     }.to_string()
 }

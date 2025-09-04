@@ -16,7 +16,7 @@ pub struct NamedData {
 #[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct NamedSummons {
     pub id: u128,
-    pub cpt: String,
+    pub cpt: String, // banner type, remove?
     pub aas: u16,
     pub aat: String,
     pub t: u128
