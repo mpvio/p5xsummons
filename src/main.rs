@@ -13,7 +13,7 @@ pub mod views;
 async fn main() {
     let app = P5XUI::new().await;
     let options = eframe::NativeOptions {
-        viewport: ViewportBuilder::default().with_inner_size([300.0, 70.0]),
+        viewport: ViewportBuilder::default().with_inner_size([300.0, 100.0]),
         ..Default::default()
     };
     eframe::run_native(
