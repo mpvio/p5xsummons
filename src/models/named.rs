@@ -3,7 +3,10 @@ use serde_derive::Serialize;
 
 #[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct Named {
-    pub data: NamedData
+    pub standard: NamedData,
+    pub character: NamedData,
+    pub weapon: NamedData,
+    pub beginner: NamedData
 }
 
 #[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
