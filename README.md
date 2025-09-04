@@ -4,18 +4,19 @@ Prerequisites:
 1. Download Fiddler (Classic is enough): https://www.telerik.com/download/fiddler
 2. “Tools” → “Options” → “HTTPS” and select “Decrypt HPPS Traffic” and accept certificate. You can change "...from all processes" to "from non-browsers" if you want to make the next step easier.
 <img width="564" height="369" alt="Fiddler-Decrypt-HTTPS" src="https://github.com/user-attachments/assets/094f23f6-283e-4384-9d54-584d71154599" />
-4. With Fiddler running, open the "history" tab on any Contract screen in P5X.
-5. Use Ctrl+F to find a URL including "gacha/getRecords" and copy it (note that the following image is taken from an equivalent guide for Reverse 1999).
+
+3. With Fiddler running, open the "history" tab on any Contract screen in P5X.
+4. Use Ctrl+F to find a URL including "gacha/getRecords" and copy it (note that the following image is taken from an equivalent guide for Reverse 1999).
 <img width="987" height="448" alt="Link-In-Fiddler" src="https://github.com/user-attachments/assets/4f8ccd66-add8-4a22-a01d-a0db6e5a537b" />
 
-6. Run p5xsummons.exe: https://github.com/mpvio/p5xsummons/releases/tag/1.0.0
+5. Run p5xsummons.exe: https://github.com/mpvio/p5xsummons/releases/tag/1.0.0
 <img width="302" height="132" alt="image" src="https://github.com/user-attachments/assets/57b6a97a-ca13-4d91-b2b0-ba376c73f14b" />
 
-7. Paste the URL in the textbox and press Submit.
-8. Once the UI changes, there will be a "p5xsummons.json" and an "authKey.txt" in the same folder as the .exe.
-9. The former contains all summon data available on the server, while the latter is your authentication key for accessing said information.
-10. The next time you use the app (and as long as authKey.txt is in your directory) you can skip using Fiddler and just press Submit. You don't need P5X running to do so either!
-11. Enjoy! If you're using this app when it first released (early September 2025) the game should still be young enough for you to grab all your summon data from launch.
+6. Paste the URL in the textbox and press Submit.
+7. Once the UI changes, there will be a "p5xsummons.json" and an "authKey.txt" in the same folder as the .exe.
+8. The former contains all summon data available on the server, while the latter is your authentication key for accessing said information.
+9. The next time you use the app (and as long as authKey.txt is in your directory) you can skip using Fiddler and just press Submit. You don't need P5X running to do so either!
+10. Enjoy! If you're using this app when it first released (early September 2025) the game should still be young enough for you to grab all your summon data from launch.
 
 TODO:
 1. Other summon trackers store your data locally too, but I'd like to host a website for easier access to this code than running an .exe and holding onto a .json file.
