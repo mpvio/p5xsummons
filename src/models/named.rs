@@ -3,15 +3,14 @@ use serde_derive::Serialize;
 
 #[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct Named {
-    pub standard: NamedData,
-    pub character: NamedData,
-    pub weapon: NamedData,
-    pub beginner: NamedData
+    pub standard: Option<NamedData>,
+    pub character: Option<NamedData>,
+    pub weapon: Option<NamedData>,
+    pub beginner: Option<NamedData>
 }
 
 #[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct NamedData {
-    pub summon: String,
     pub list: Vec<NamedSummons>,
     pub total: usize
 }
@@ -20,7 +19,6 @@ pub struct NamedData {
 pub struct NamedSummons {
     #[serde(rename = "summonId")]
     pub summon_id: u128,
-    pub banner: String, // banner type, remove?
     #[serde(rename = "itemId")]
     pub item_id: String,
     pub item: String, // character/ persona/ weapon

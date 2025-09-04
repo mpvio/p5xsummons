@@ -4,7 +4,8 @@ use eframe::egui;
 use egui::Ui;
 use tokio::runtime::Runtime;
 
-use crate::controllers::{get_data::query_all, manage_auth_key::url_to_key, read_write::write_or_update_all};
+use crate::controllers::{get_data::query_all, manage_auth_key::url_to_key};
+use crate::controllers::read_write::write_or_update_all;
 
 pub struct P5XUI {
     url: String,
