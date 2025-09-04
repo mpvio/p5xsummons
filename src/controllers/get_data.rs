@@ -4,8 +4,6 @@ use std::fs::read_to_string;
 use crate::models::{named::{NamedData, NamedSummons}, original::{Response, ResponseData}};
 
 pub async fn query(gacha_type: u8, page: u8) -> Option<NamedData> {
-    // PRINT
-    // println!("{gacha_type}, {page}");
     if let Ok(auth_key) = read_to_string("authKey.txt") {
         let _params = [
             ("gachaType", &gacha_type.to_string()), ("authKey", &auth_key), ("page", &page.to_string()), ("size", &String::from("10"))
@@ -18,8 +16,6 @@ pub async fn query(gacha_type: u8, page: u8) -> Option<NamedData> {
                 if response.status() == reqwest::StatusCode::OK {
                     if let Ok(info) = response.json::<Response>().await {
                         let mut named_summons = name_summons(&info.data);
-                        // PRINT
-                        // println!("{} < {}?", info.data.page, info.data.pages);
                         if info.data.page < info.data.pages {
                             // append next page(s)
                             if let Some(mut remainder) = Box::pin(query(gacha_type, page+1)).await {
@@ -27,11 +23,13 @@ pub async fn query(gacha_type: u8, page: u8) -> Option<NamedData> {
                             }
                         }
                         let total = named_summons.len();
-                        let named_data = NamedData {
+                        let mut named_data = NamedData {
                             summon: get_banner_type(&gacha_type),
                             list: named_summons,
                             total
                         };
+                        // ensure summons are sorted
+                        named_data.sort_by_summon_id_desc();
                         return Some(named_data);
                     }
                 }

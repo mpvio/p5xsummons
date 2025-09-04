@@ -23,3 +23,13 @@ pub struct NamedSummons {
     pub item: String,
     pub timestamp: u128
 }
+
+impl NamedData {
+    pub fn sort_by_summon_id_asc(&mut self) {
+        self.list.sort_by(|a, b| a.summon_id.cmp(&b.summon_id));
+    }
+
+    pub fn sort_by_summon_id_desc(&mut self) {
+        self.list.sort_by(|a, b| b.summon_id.cmp(&a.summon_id));
+    }
+}

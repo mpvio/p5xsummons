@@ -1,11 +1,11 @@
-use crate::{controllers::{get_data::query, read_write::{read_items, write_items}}, models::named::NamedData};
+use crate::{controllers::{get_data::query, read_write::{read_items, update_items}}, models::named::NamedData};
 
 pub mod models;
 pub mod controllers;
 
 // TODO
 /*
-* add file updating (only add summons if their ids are unique)
+* add ui/ way for users to add gacha url to automatically fetch id
 * if a database is found -> replace item signifiers (aas) with item names
 */
 #[tokio::main]
@@ -26,7 +26,7 @@ async fn _get_data() -> Vec<NamedData> {
 
 fn _write_to_files(data: Vec<NamedData>) {
     for d in data {
-        write_items(&d.summon, &d);
+        println!("{}", update_items(&d.summon, &d));
     }
 }
 
