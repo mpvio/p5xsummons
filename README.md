@@ -8,7 +8,7 @@ Prerequisites:
 5. Use Ctrl+F to find a URL including "gacha/getRecords" and copy it (note that the following image is taken from an equivalent guide for Reverse 1999).
 <img width="987" height="448" alt="Link-In-Fiddler" src="https://github.com/user-attachments/assets/4f8ccd66-add8-4a22-a01d-a0db6e5a537b" />
 
-6. Run p5xsummons.exe.
+6. Run p5xsummons.exe: https://github.com/mpvio/p5xsummons/releases/tag/1.0.0
 <img width="302" height="132" alt="image" src="https://github.com/user-attachments/assets/57b6a97a-ca13-4d91-b2b0-ba376c73f14b" />
 
 7. Paste the URL in the textbox and press Submit.
@@ -23,4 +23,4 @@ TODO:
 
 FINALLY:
 * Fiddler instructions adapted from: https://www.timekeeper.top/auto_import.html
-* If you found this useful, please consider donating to my ko-fi, linked in the sidebar!
+* If you found this useful, please consider donating to my ko-fi: https://ko-fi.com/theroonco
