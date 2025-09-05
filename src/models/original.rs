@@ -21,7 +21,7 @@ pub struct ResponseData {
 pub struct ResponseSummons {
     pub id: u128,
     pub cpt: u8,
-    pub aas: u16,
+    pub aas: u32,
     pub aat: u8,
     pub t: u128
 }

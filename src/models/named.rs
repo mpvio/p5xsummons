@@ -87,6 +87,8 @@ pub struct NamedData {
 pub struct NamedSummons {
     #[serde(rename = "summonId")]
     pub summon_id: u128,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub name: Option<String>,
     #[serde(rename = "itemId")]
     pub item_id: String,
     pub item: String, // character/ persona/ weapon
