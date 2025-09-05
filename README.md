@@ -15,7 +15,7 @@ Prerequisites:
 6. Paste the URL in the textbox and press Submit.
 7. Once the UI changes, there will be a "p5xsummons.json" and an "authKey.txt" in the same folder as the .exe.
 8. The former contains all summon data available on the server, while the latter is your authentication key for accessing said information.
-9. The next time you use the app (and as long as authKey.txt is in your directory) you can skip using Fiddler and just press Submit. You don't need P5X running to do so either!
+9. The next time you use the app (and as long as authKey.txt is in your directory) you can skip using Fiddler and just press Submit. You don't need P5X running to do so either, though the authKey will expire after ~12 hours.
 10. Enjoy! If you're using this app when it first released (early September 2025) the game should still be young enough for you to grab all your summon data from launch.
 
 TODO:
