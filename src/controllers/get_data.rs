@@ -69,10 +69,16 @@ fn name_summons(data: &ResponseData) -> Vec<NamedSummons> {
         let named_summon = NamedSummons {
             summon_id: summon.id,
             item_id: summon.aas.to_string(),
+            name: id_to_name(summon.aas),
             item,
             timestamp: summon.t,
         };
         named_summons.push(named_summon);
     }
     named_summons
+}
+
+fn id_to_name(_id: u32) -> Option<String> {
+    // TODO: implement id -> String conversion with a database
+    return None;
 }
