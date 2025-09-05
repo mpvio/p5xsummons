@@ -68,7 +68,7 @@ fn name_summons(data: &ResponseData) -> Vec<NamedSummons> {
         }.to_string();
         let named_summon = NamedSummons {
             summon_id: summon.id,
-            item_id: summon.aas.to_string(),
+            item_id: summon.aas,
             name: id_to_name(summon.aas),
             item,
             timestamp: summon.t,

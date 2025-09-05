@@ -3,6 +3,10 @@ use std::collections::HashSet;
 use serde_derive::Deserialize;
 use serde_derive::Serialize;
 
+use serde::de::Error;
+use serde_json::Value;
+use serde::Deserialize as deser;
+
 #[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct Named {
     pub standard: Option<NamedData>,
@@ -89,8 +93,8 @@ pub struct NamedSummons {
     pub summon_id: u128,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub name: Option<String>,
-    #[serde(rename = "itemId")]
-    pub item_id: String,
+    #[serde(rename = "itemId", deserialize_with = "deserialize_item_id")]
+    pub item_id: u32,
     pub item: String, // character/ persona/ weapon
     pub timestamp: u128
 }
@@ -114,6 +118,15 @@ impl NamedData {
             },
             _ => true
         }
+    }
+}
+
+fn deserialize_item_id<'de, D>(deserializer: D) -> Result<u32, D::Error> where D: serde::Deserializer<'de> {
+    let value = Value::deserialize(deserializer)?;
+    match value {
+        Value::Number(n) => Ok(n.as_u64().unwrap_or_default() as u32),
+        Value::String(s) => s.parse::<u32>().map_err(Error::custom),
+        _ => Ok(0)
     }
 }
 
