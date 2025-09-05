@@ -59,7 +59,6 @@ fn show_ui(
             match result.join() {
                 Ok(outcome) => {
                     *track_result = update_named(&outcome);
-                    println!("{}", track_result);
                 },
                 Err(_) => {},
             }
